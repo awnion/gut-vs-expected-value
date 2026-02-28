@@ -10,6 +10,24 @@ from collections.abc import Iterable
 
 from matplotlib.lines import Line2D
 
+DARK_MODE_CSS = """\
+<style>
+@media (prefers-color-scheme: dark) {
+  g[id^="text_"] { fill: #c9d1d9 !important; }
+  use[style*="stroke: #000000"] { stroke: #c9d1d9 !important; }
+  path[style*="stroke: #000000"] { stroke: #c9d1d9 !important; }
+}
+</style>"""
+
+
+def inject_dark_mode(svg_path: str) -> None:
+    with open(svg_path) as f:
+        content = f.read()
+    content = content.replace("<defs>", f"{DARK_MODE_CSS}\n<defs>", 1)
+    with open(svg_path, "w") as f:
+        f.write(content)
+
+
 # X range (guaranteed amount) from $10 to $10M
 X = np.logspace(1, 7, 500)
 
@@ -89,7 +107,8 @@ ax2.set_xlim(X[0], X[-1])
 ax2.set_ylim(0, 105)
 
 plt.tight_layout()
-plt.savefig("img/ticket_price_plot.svg", bbox_inches="tight")
+plt.savefig("img/ticket_price_plot.svg", bbox_inches="tight", transparent=True)
+inject_dark_mode("img/ticket_price_plot.svg")
 print("Saved line charts")
 
 
@@ -185,5 +204,6 @@ legend_elements = [
 ax3.legend(handles=legend_elements, fontsize=11, loc="upper right")
 
 plt.tight_layout()
-plt.savefig("img/violin_plot.svg", bbox_inches="tight")
+plt.savefig("img/violin_plot.svg", bbox_inches="tight", transparent=True)
+inject_dark_mode("img/violin_plot.svg")
 print("Saved violin plot")
