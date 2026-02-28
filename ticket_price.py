@@ -16,6 +16,7 @@ DARK_MODE_CSS = """\
   g[id^="text_"] { fill: #c9d1d9 !important; }
   use[style*="stroke: #000000"] { stroke: #c9d1d9 !important; }
   path[style*="stroke: #000000"] { stroke: #c9d1d9 !important; }
+  g[id^="legend_"] > g:first-child path { fill: #21262d !important; stroke: #444c56 !important; }
 }
 </style>"""
 
