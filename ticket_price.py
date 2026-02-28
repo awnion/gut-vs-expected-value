@@ -13,7 +13,7 @@ from matplotlib.lines import Line2D
 DARK_MODE_CSS = """\
 <style>
 @media (prefers-color-scheme: dark) {
-  g[id^="text_"] path { fill: #c9d1d9 !important; }
+  g[id^="text_"] { fill: #c9d1d9 !important; }
   use[style*="stroke: #000000"] { stroke: #c9d1d9 !important; }
   path[style*="stroke: #000000"] { stroke: #c9d1d9 !important; }
 }
